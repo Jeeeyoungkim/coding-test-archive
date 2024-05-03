@@ -3,7 +3,7 @@ def solution(a, b):
     weekdays = ['FRI','SAT','SUN','MON','TUE','WED','THU']
     monthdays = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     day = 0
-    
+    # sum[:i-1]
     for i in range(1, a):
             day += monthdays[i-1]
     day += b
