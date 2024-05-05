@@ -21,6 +21,7 @@ def solution(today, terms, privacies):
         privacie = privacie.split(" ")
         limit_month = terms_dict[privacie[-1]] # 개월 수 구하기
         limit.append(count_day(privacie[0]) + limit_month * 28 - 1)
+        # 보관 가능 날짜 계산 - 당일제외
     
 
     answer = [i+1 for i in range(len(limit)) if today_count > limit[i]]
