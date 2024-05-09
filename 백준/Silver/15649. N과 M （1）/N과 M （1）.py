@@ -1,12 +1,19 @@
-# 1부터 n까지 자연수 중에서 중복 없이 m개를 고른 수열
+N, M = map(int, input().split())
+# 1부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열
 
-n, m = map(int, input().split())
+sequence = []
 
-import itertools
-
-n_list = list(range(1, n+1))
-
-for i in itertools.permutations(n_list, m):
-    my_str = ' '.join(map(str, i))
-    print(my_str)
+def dfs(end_sequence):
+    if len(sequence) == M:
+        print(*sequence)
+        return
     
+    for i in range(1, end_sequence + 1):
+        if i in sequence:
+            continue
+
+        sequence.append(i)
+        dfs(end_sequence)
+        sequence.pop()
+
+dfs(N)
