@@ -1,9 +1,13 @@
 import math
+import itertools
 
 def isPrime(n):
     if n <= 1:
         return False
-    
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
     for i in range(2, int(math.sqrt(n)+1)):
         if n % i == 0:
             return False
@@ -12,25 +16,14 @@ def isPrime(n):
 
 def solution(numbers):
     arr = [int(num) for num in numbers]
-    prime_set = []
-    visited = [0] * len(arr)
+    prime_set = set()
     
-    def dfs(start, sequence, visited):
-        if start == len(arr) and sequence:
-            prime_set.append(sequence)
-            return
-
-        for i in range(0, len(arr)):
-            if visited[i] != 1: # 선택안한 숫자면
-                visited[i] = 1
-                dfs(start+1, sequence + str(arr[i]), visited) # 선택한경우
-                dfs(start+1, sequence, visited) # 선택안한경우
-                visited[i] = 0
-
+    for i in range(1, len(numbers) + 1):
+        for perm in itertools.permutations(numbers, i):
+            num = int(''.join(perm))
+            prime_set.add(num)
+    
     answer = 0
-    dfs(0, "", visited)
-    prime_set = set(map(int, prime_set))   
-    
     for target in prime_set:
         if isPrime(target):
             answer += 1
